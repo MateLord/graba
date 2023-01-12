@@ -10,30 +10,40 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import LightSwitch from './LightSwitch';
 import { useState } from 'react';
+import Switch from '@mui/material/Switch';
 
 
 export default function App() {
 
-  const [isChecked, setIsChecked] = useState(false);
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setIsChecked(event.target.checked);
-};
-
-  const themecolor = createTheme({
+  const light = createTheme({
     palette: {
       mode: 'light',
     },
   });
 
-  if (isChecked) {
-    themecolor.palette.mode = 'dark';
-  } else {    
-    themecolor.palette.mode = 'light';
-  }
+  const dark = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  });
+
+  const [isChecked, setIsChecked] = useState(false);
+  const [selectedTheme, setSelectedTheme] = useState(light);
+  
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsChecked(event.target.checked);
+    if (isChecked) {
+      setSelectedTheme(light);
+    } else {    
+      setSelectedTheme(dark);
+    }
+};
+
+
+ 
 
   return (
-     <ThemeProvider  theme={themecolor}>
+     <ThemeProvider  theme={selectedTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
         <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -43,8 +53,8 @@ export default function App() {
             }
             title="Link Graba"
           />
-          <LightSwitch checked={isChecked} onChange={handleChange} />
-
+          <Switch checked={isChecked} onChange={handleChange} />
+        
         </Box>
         <Box sx={{ my: 4 }}>
 

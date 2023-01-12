@@ -8,7 +8,6 @@ import Avatar from '@mui/material/Avatar';
 import CardHeader from '@mui/material/CardHeader';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import LightSwitch from './LightSwitch';
 import { useState } from 'react';
 import Switch from '@mui/material/Switch';
 
@@ -46,7 +45,8 @@ export default function App() {
      <ThemeProvider  theme={selectedTheme}>
       <CssBaseline />
       <Container maxWidth="lg">
-        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <Box sx={{ display: "flex",
+    justifyContent: "space-between" }}>
           <CardHeader
             avatar={
               <Avatar alt="MandMs" src="logo.png" />
@@ -56,7 +56,7 @@ export default function App() {
           <Switch checked={isChecked} onChange={handleChange} />
         
         </Box>
-        <Box sx={{ my: 4 }}>
+        <Box sx={{ my: 6 }}>
 
 
           <TextFileData />

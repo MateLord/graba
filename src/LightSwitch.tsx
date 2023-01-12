@@ -55,7 +55,7 @@ function LightSwitch(){
     const [state, setState] = useState(false);
    
   return (
-        <Switch sx={{ m: 1 }} checked={state} onChange={(event) => setState(event.target.checked)}/>
+        <GownoZajebane sx={{ m: 1 }} checked={state} onChange={(event) => setState(event.target.checked)}/>
   );
 }
 

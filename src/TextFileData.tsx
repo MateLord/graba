@@ -11,6 +11,7 @@ import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
+import Link from '@mui/material/Link';
 
 const TextFileData: React.FC = () => {
         const [data, setData] = useState<any>(null);
@@ -57,8 +58,8 @@ const JSONDataTable: React.FC<Props> = ({ data }) => {
         <TableBody>
           {data.map(row => (
             <TableRow key={row.link}>
-              <TableCell component="th" scope="row">{row.link}</TableCell>
-              <TableCell align="right">{row.env}</TableCell>
+              <TableCell component="th" scope="row">{row.name}</TableCell>
+              <TableCell align="right"><Link href={row.link}>{row.link}</Link></TableCell>
               <TableCell align="right">{row.describe}</TableCell>
             </TableRow>
           ))}

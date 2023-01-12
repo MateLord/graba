@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import { makeStyles, createStyles } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -13,22 +12,24 @@ import TabContext from '@mui/lab/TabContext';
 import TabList from '@mui/lab/TabList';
 import TabPanel from '@mui/lab/TabPanel';
 
-export default function TextFileData() {
-    const [data, setData] = useState<Data[]>([]);
+const TextFileData: React.FC = () => {
+        const [data, setData] = useState<any>(null);
+      
+        useEffect(() => {
+          fetch('plik.json')
+            .then(response => response.json())
+            .then(jsonData => setData(jsonData))
+            .catch(error => console.error(error));
+        }, []);
+      
+        if (!data) {
+          return <div>Loading...</div>;
+        }
+      
+        return  <p> <Tabs data={data} /></p>
+      };
 
-  useEffect(() => {
-    fetch('data.txt')
-    .then(response => response.json())
-    .then(json => setData(json))
-    .catch(err => console.error(err));
-  }, []);
-
-  return (
-    <div>
-        <p> <Tabs data={data} /></p>
-    </div>
-  );
-}
+export default TextFileData;
 
 interface Data {
   name: string;
@@ -78,12 +79,12 @@ const Tabs: React.FC<Props> = ({ data }) => {
       setValue(newValue);
     };
   
-  
+  /* wyświetla taby z nazwami środowisk */
     return (
       <Box sx={{ width: '100%', typography: 'body1' }}>
         <TabContext value={value}>
           <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
+            <TabList onChange={handleChange} aria-label="nazwy srodowisk">
             {srodowiska.map(row => (
               <Tab label={row.env} value={row.env} />
               ))}
